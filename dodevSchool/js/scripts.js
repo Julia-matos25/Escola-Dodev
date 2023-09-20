@@ -3,32 +3,68 @@
 ////////////////////////////////////////////////////////////////////////
 
 class Aluno {
-  
+  Nome
+  Idade
+  Nota
+  constructor(nome, idade, nota){
+    this.Nome = nome
+    this.Idade = idade
+    this.Nota = nota
+  }
 }
 
 // Array
-
+let arrayAlunos = []
 
 //funções projeto
 
-function CadastrarAluno() {
-  
+function CadastrarAluno(nome, idade, nota, array) {
+  let objetoAluno = new Aluno(nome, idade, nota)
+  if(!array.some(x => x.Nome == nome))
+  array.push(objetoAluno)
+return objetoAluno
 }
 
-function OrdenarPorNota() {
+function OrdenarPorNota(array) {
+ array.sort((a, b) => a.Nota - b.Nota)
+ return array
+}
+
+function OrdenarPorIdade(array) {
+ array.sort((a, b) => b.idade - a.idade)
+ return array
+}
+
+function OrdenarPorNome(array) {
+  array.sort((a, b) =>  {
+  //Converta para maíscula para garantir a ordem correta
+    const nomeA = a.Nome.toLowerCase();
+    const nomeB = b.Nome.toLowerCase();
+    
+    if(nomeA < nomeB){
+      return -1;
+    }
+    if(nomeA > nomeB){
+      return 1;
+    }
+    return 0;
+  });
+   return array
+
+}
+
+function CalcularMedia(array){
+ if(array.length === 0){
+ return 0; //Retorna 0 se o array de alunos estiver vazio
+ }
+ let somarNotas = 0;
+
+ array.forEach((aluno) =>{
+  somarNotas += Number(aluno.Nota)
+ })
  
-}
-
-function OrdenarPorIdade() {
-
-}
-
-function OrdenarPorNome() {
-
-}
-
-function CalcularMedia(){
-
+ const media = somarNotas / array.length;
+ return media
 }
 
 ////////////////////////////////////////////////////////////////////////
